@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Backstage Timer</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div id="stage-timer">
+      <header class="topbar">
+  <div class="title">
+    <img 
+      src="https://www.ukm.no/_next/image?url=https%3A%2F%2Fsys.ukm.no%2F2026-snaase-snasa-snaase-snasa%2Ffiles%2F2026%2F01%2FUKM-bobla_bla_1500-1196x1200.png&w=3840&q=75" 
+      alt="UKM 2026" 
+      class="top-logo"
+      id="secretLogo">
+  </div>
+  <div id="wallClock" class="top-clock">--:--:--</div>
+</header>
+
+      <main>
+        <div id="previewBox">
+          <div id="clock">--:--</div>
+          <div id="artist">Ingen</div>
+          <div id="stageMessage" class="stage-message hidden"></div>
+          <div id="previewInner">
+            <div id="progressWrap">
+              <div id="progressBar"><div id="progressFill"></div><div id="progressMarker" aria-hidden="true"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="cueInfo">
+          <div class="cueFinish">Cue finish<br><span id="cueFinishTime">--:--:--</span></div>
+        </div>
+
+        <div id="blackoutOverlay" class="hidden"></div>
+      </main>
+
+      <footer class="footer">
+        <div id="nextLabel">Neste:</div>
+        <div id="nextArtist">Ingen neste</div>
+      </footer>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js"></script>
+  </body>
+</html>
+<script>
+let clickCount = 0;
+const logo = document.getElementById("secretLogo");
+
+logo.addEventListener("click", function() {
+  clickCount++;
+
+  // Gå til admin etter 10 trykk
+  if (clickCount === 10) {
+    window.location.href = "admin.html";
+  }
+});
+</script>
+

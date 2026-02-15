@@ -1,0 +1,17 @@
+{
+  "name": "backstage-timer",
+  "version": "0.1.0",
+  "description": "Backstage timer that listens to Multiplay OSC and shows NOW/NEXT via Socket.IO",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "osc": "^2.4.1"
+  }
+}

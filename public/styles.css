@@ -1,0 +1,270 @@
+html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:#111111;color:#fff}
+#stage-timer{display:flex;flex-direction:column;height:100vh;}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:#0d0d0d;border-bottom:1px solid rgba(255,255,255,0.04)}
+.topbar .title{color:#58b6ff;font-weight:700;font-size:28px}
+.topbar .brand{display:none}
+.topbar #wallClock, .topbar .top-clock{color:#9ee1b6;font-size:22px;font-weight:700}
+.topbar .title{display:flex;align-items:center}
+.topbar .top-logo{height:56px;max-height:56px;object-fit:contain;border-radius:6px}
+@media (max-width:700px){.topbar .top-logo{height:36px;max-height:36px}}
+main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+#clock{font-size:160px;font-weight:700;line-height:1;color:#fff;text-shadow:0 4px 18px rgba(0,0,0,0.6)}
+#artist{font-size:36px;color:#66c2a5;margin-top:8px;font-weight: 600;}
+#progressWrap{width:90%;max-width:1100px;margin-top:22px}
+#progressBar{height:22px;background:#133a2a;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
+#progressFill{height:100%;width:0%;background:linear-gradient(90deg,#1b8a4a,#6be07e);transition:width 400ms linear}
+#progressBar{position:relative}
+#progressMarker{position:absolute;top:-10px;left:0;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:10px solid #fff;transition:left 200ms linear,border-bottom-color 200ms linear;z-index:5}
+.footer{display:flex;justify-content:space-between;align-items:center;padding:20px 20px;background:#0d0d0d;border-top:1px solid rgba(255,255,255,0.04)}
+#nextLabel{color:#9fb8c9;font-size:28px;font-weight:700;}
+#nextArtist{font-weight:700;color:#bfeee0;font-size:28px}
+/* legacy small admin banner removed; using stage message */
+.admin-message{display:none}
+/* Flash mode: very prominent full-screen message */
+.admin-message.flash{position:fixed;left:0;right:0;top:0;bottom:0;display:flex;align-items:center;justify-content:center;transform:none;background:linear-gradient(180deg,#ff4d4d,#ff8a4d);color:#fff;font-size:64px;font-weight:800;border-radius:0;border:0;z-index:9999;text-align:center;padding:40px}
+.admin-message.flash{animation:flashPulse 900ms ease-in-out infinite}
+.flash-text{animation:flashPulse 700ms ease-in-out infinite;transform-origin:center}
+@keyframes flashPulse{0%{transform:scale(1);filter:brightness(1);text-shadow:0 0 0 rgba(0,0,0,0)}50%{transform:scale(1.06);filter:brightness(1.36);text-shadow:0 10px 60px currentColor, 0 0 28px rgba(255,255,255,0.14)}100%{transform:scale(1);filter:brightness(1);text-shadow:0 0 0 rgba(0,0,0,0)}}
+
+/* Focus overlay: full-screen message that can be toggled */
+/* Stage message placed inside preview box */
+.stage-message{display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 20px;color:#ffffff;font-weight:800;line-height:1;max-width:100%;word-break:break-word}
+.stage-message.hidden{display:none}
+.stage-message.default-pos{position:relative;top:22px;font-size:48px}
+.stage-message.focus-pos{position:relative;font-size:140px}
+
+/* Flashing effect applied to admin message or focus overlay */
+.flash-text{animation:flashPulse 700ms ease-in-out infinite}
+
+@media (max-width:1200px){.stage-message.focus-pos{font-size:80px}}
+@media (max-width:700px){.stage-message.focus-pos{font-size:36px;padding:20px}}
+
+/* When focused: shrink/move clock to bottom of preview */
+.focused #clock{font-size:48px}
+.focused #artist{font-size:18px;}
+.focused #previewInner{margin-top:18px}
+.focused #clock{order:2}
+.focused #stageMessage{order:1}
+
+/* Keypad styles for admin unlock */
+#keypadWrap{display:flex;align-items:center;justify-content:center;padding:30px}
+.keypad{background:#0b0b0b;border:1px solid rgba(255,255,255,0.04);padding:18px;border-radius:10px;width:320px;box-shadow:0 6px 24px rgba(0,0,0,0.6)}
+.key-display{background:#071212;color:#9fe7c9;padding:10px;border-radius:6px;text-align:center;font-size:22px;margin-bottom:12px}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.key{padding:14px 0;background:#172f25;color:#fff;border-radius:6px;border:none;font-size:18px;font-weight:700}
+.key.clear{background:#333}
+.key.ok{background:#1b8a4a}
+.key-help{color:#9fb8c9;margin-top:10px;text-align:center}
+.keypad .key:active{transform:translateY(1px)}
+
+/* hide default admin panel while locked */
+#adminContent{display:none}
+
+/* Presets list */
+.admin-grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+.admin-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.connections{color:#9fb8c9;font-weight:700}
+.controls button{margin-left:8px;padding:8px 12px;border-radius:6px;border:none;background:#2f2f2f;color:#fff}
+.previewWrap{height:220px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
+.previewWrap iframe{width:100%;height:100%;border:0}
+
+/* Display preview box styles */
+#previewBox{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%}
+#previewInner{width:100%;display:flex;justify-content:center}
+.cueInfo{margin-top:14px;color:#9fb8c9;display:flex;gap:24px;align-items:center}
+.nowClock{font-size:20px}
+.cueFinish span{font-size:20px;color:#fff}
+.cueFinish{display:flex;flex-direction:column;align-items:flex-start;margin-top:18px}
+
+/* layout: wall clock and cue finish side-by-side on main page */
+#cueInfo{justify-content:center}
+
+/* Blackout overlay */
+#blackoutOverlay{position:fixed;left:0;right:0;top:0;bottom:0;background:#000;z-index:9998;display:none}
+#blackoutOverlay.show{display:block}
+
+/* Focus mode: enlarge clock */
+.focus #clock{font-size:220px;color:#fff}
+.focus #artist{font-size:44px;}
+.compose textarea{height:140px;background:#0b0b0b;color:#fff;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04)}
+.compose-row{display:flex;justify-content:space-between;gap:12px;margin-top:12px}
+.presets{background:#0b0b0b;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);height:420px;overflow:auto}
+.presets-header{font-weight:700;color:#9ee1b6;margin-bottom:8px}
+.preset-card{background:#101010;padding:10px;border-radius:6px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.preset-text{flex:1;color:#fff;margin-right:8px;white-space:pre-wrap}
+.preset-controls button{margin-left:6px;padding:6px 8px;border-radius:6px;border:none;background:#1b8a4a;color:#fff}
+.preset-controls .preset-delete{background:#6b2b2b}
+.presets-empty{color:#8b9aa3;padding:14px;text-align:center}
+@media (max-width:800px){#clock{font-size:72px}#artist{font-size:20px}}
+
+/* Admin exact layout overrides */
+.admin-wrap{padding:18px}
+.admin-header{display:flex;justify-content:space-between;align-items:center;padding:6px 0}
+.admin-header .title{font-weight:700;color:#fff;font-size:18px}
+.admin-main{display:grid;grid-template-columns:260px 1fr 420px;gap:18px;margin-top:12px}
+.left-col{display:flex;flex-direction:column;gap:12px}
+.timeline-card,.clock-card,.connections-card{background:#0b0b0b;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04)}
+.mini-progress{height:14px;background:#222;border-radius:6px;overflow:hidden}
+.mini-fill{height:100%;width:40%;background:linear-gradient(90deg,#1b8a4a,#6be07e)}
+.timeline-labels{font-size:0px;color:#8b9aa3;margin-top:0px;}
+.small-clock{font-size:20px;color:#fff}
+.cue-finish{color:#9fb8c9}
+.connections-card{font-weight:700;color:#9fb8c9;text-align:left}
+.center-col{display:flex;flex-direction:column;gap:12px}
+.preview-frame{background:#0b0b0b;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);height:760px}
+.preview-frame iframe{width:100%;height:100%;border:0}
+.center-controls{display:flex;gap:12px;justify-content:center;margin-top:8px}
+.control-btn{padding:10px 16px;border-radius:6px;border:0;background:#2f2f2f;color:#fff}
+
+/* Hover/interaction polish for buttons and icons */
+button, .btn, .control-btn, .toggle-btn, .key, .format-icon, .preset-controls button, .delete-btn, .flash-btn, .focus-btn {
+	transition: background-color 180ms ease, transform 120ms ease, box-shadow 180ms ease, opacity 160ms ease;
+	cursor: pointer;
+}
+
+.control-btn:hover, .btn:hover, .preset-controls button:hover, .toggle-btn:hover, .key:hover, .format-icon:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+	opacity: 0.98;
+}
+
+.control-btn:active, .btn:active, .preset-controls button:active, .toggle-btn:active, .key:active, .format-icon:active {
+	transform: translateY(0) scale(0.99);
+	box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+
+/* distinct hover for primary green buttons */
+.control-btn.active, .btn.active, .preset-controls .preset-show:hover { background:#1b8a4a }
+.control-btn.active:hover, .btn.active:hover { box-shadow: 0 10px 28px rgba(27,138,74,0.18); transform: translateY(-4px); }
+
+/* keyboard focus visible */
+button:focus, .toggle-btn:focus, .key:focus, .format-icon:focus { outline: 2px solid rgba(27,138,74,0.14); outline-offset: 3px; }
+
+/* format-icon small tactile feedback */
+.format-icon{transition: background-color 130ms ease, transform 100ms ease, box-shadow 140ms ease}
+.format-icon.active{transform: translateY(-2px)}
+.right-col{display:flex;flex-direction:column;gap:12px}
+.messages-header{display:flex;justify-content:space-between;align-items:center;color:#9fb8c9}
+.presets-list{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.preset-card{background:#111;padding:12px;border-radius:6px;border:1px solid rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center}
+.preset-text{color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:300px}
+.preset-controls button{margin-left:6px;padding:6px 8px;border-radius:6px;border:none;background:#1b8a4a;color:#fff}
+.preset-controls .preset-delete{background:#6b2b2b}
+.add-message{margin-top:8px;text-align:center}
+.btn{background:#272727;color:#fff;padding:8px 12px;border-radius:6px;border:0}
+.small{padding:6px 10px;font-size:13px}
+.muted{opacity:0.8}
+
+/* active state for control buttons */
+.control-btn.active{background:#1b8a4a;color:#fff}
+
+/* adjust admin keypad and presets responsiveness */
+@media (max-width:1100px){.admin-main{grid-template-columns:1fr;}.right-col{order:3}.left-col{order:1}.center-col{order:2}}
+
+/* Message box styles to match screenshot */
+#messagesContainer{counter-reset:msg-index;}
+.message-box{background:#1a1a1a;border-radius:8px;padding:12px;border:1px solid rgba(255,255,255,0.03);position:relative}
+.message-box::before{counter-increment:msg-index;content:counter(msg-index);position:absolute;left:-18px;top:12px;background:transparent;color:#9fb8c9;font-weight:700}
+.message-box + .message-box{margin-top:10px}
+.msg-text{width:100%;height:66px;background:#0b0b0b;border-radius:6px;padding:10px;color:#fff;border:1px solid rgba(255,255,255,0.02);resize:vertical}
+.format-row{display:flex;gap:12px;align-items:center;margin-top:8px}
+.format-icon{display:inline-block;width:28px;height:20px;border-radius:4px;background:#222;color:#fff;text-align:center;line-height:20px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+.format-icon.green{color:#1b8a4a}
+.format-icon.red{color:#d24b4b}
+.format-icon.underline{border-bottom:3px solid #fff}
+.format-icon.active{box-shadow: inset 0 -4px 0 #fff}
+.format-icon.green.active{box-shadow: inset 0 -4px 0 #1b8a4a}
+.format-icon.red.active{box-shadow: inset 0 -4px 0 #d24b4b}
+.msg-controls{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:8px}
+.msg-controls .msg-status{color:#ffffff;font-size:13px;font-weight: bold;}
+.toggle-btn{background:#2b2b2b;border:1px solid rgba(255,255,255,0.04);color:#fff;padding:8px 12px;border-radius:6px;display:flex;align-items:center;gap:8px}
+.toggle-btn::before{content:'○';font-size:12px;color:#999}
+.toggle-btn.active::before{content:'●';color:#1b8a4a}
+.delete-btn{background:transparent;border:0;color:#fff;padding:6px 8px}
+.add-message{margin-top:12px;text-align:center}
+.add-message .btn{background:#2b2b2b;padding:10px 18px;border-radius:8px}
+.add-message .btn::after{content:' ';color:#e0b84a;margin-left:6px}
+
+/* small tweaks */
+.presets-empty{color:#8b9aa3;padding:10px}
+
+/* GO-knapp */
+.go {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 20px 40px;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+
+  background: #00ff66;
+  color: #000;
+
+  border: 3px solid #00ff66;
+  border-radius: 12px;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition: all 0.2s ease;
+}
+
+.go:hover {
+ 
+  color: #000;
+}
+
+/* STOP-knapp - matcher GO-stil */
+.stop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 20px 40px;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+
+  background: #ff5555;
+  color: #000000;
+
+  border: 3px solid #ff5555;
+  border-radius: 12px;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition: all 0.2s ease;
+}
+
+.stop:hover {
+  background: #ff5555;
+  color: #000;
+}
+
+.fadeall {
+   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 20px 40px;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+
+  background: #eeff55;
+  color: #000000;
+
+ 
+  border-radius: 12px;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition: all 0.2s ease;
+}
