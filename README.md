@@ -16,10 +16,15 @@ Du kan enten:
 ```bash
 git clone https://github.com/DJKevinDJCool/Backstage-timer.git
 cd Backstage-timer
+```
 2️⃣ Installer avhengigheter
+```
 npm install
+```
 3️⃣ Kjør serveren
+```
 node server.js
+```
 Som standard bruker appen disse portene:
 
 HTTP-server: 3000 → åpne i nettleser: http://localhost:3000
@@ -30,8 +35,12 @@ MultiPlay innkommende OSC: 8000
 
 ⚠️ Viktig: Sørg for at portene matcher de du har satt i MultiPlay OSC‑innstillingene!
 
+```
+```
 4️⃣ Bruk appen
-Åpne nettleser på http://localhost:3000
+Åpne nettleser på 
+http://localhost:3000
+
 
 Se NOW / NEXT bli oppdatert i sanntid når MultiPlay sender signaler.
 
