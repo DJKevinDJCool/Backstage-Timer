@@ -8,7 +8,7 @@ const keypadWrap = document.getElementById('keypadWrap');
 const keyDots = document.getElementById('keyDots');
 const adminContent = document.getElementById('adminContent');
 
-const CODE = '1234'; // KODE FOR Å KOMME INN!
+const CODE = '1706'; // KODE FOR Å KOMME INN!
 let entered = '';
 
 function updateDots() {
