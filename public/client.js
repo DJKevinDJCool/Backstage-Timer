@@ -224,3 +224,13 @@ socket.on('stats', (s) => {
   const el = document.getElementById('liveConnections');
   if (el) el.textContent = String((s && s.connections) ? s.connections : 0);
 });
+
+
+
+
+
+
+
+/* Laget av Kevin Johnsen :)*/
+// client.js - end
+// This file is served to the stage display browser and handles real-time updates and UI rendering based on server messages.

@@ -16,7 +16,9 @@
       class="top-logo"
       id="secretLogo">
   </div>
+  <div id="hovedtekst" class="tekst">UKM 2026</div>
   <div id="wallClock" class="top-clock">--:--:--</div>
+ 
 </header>
 
       <main>
@@ -32,7 +34,7 @@
         </div>
 
         <div id="cueInfo">
-          <div class="cueFinish">Cue finish<br><span id="cueFinishTime">--:--:--</span></div>
+          <div class="cueFinish">Ferdig klokka:<br><span id="cueFinishTime">--:--:--</span></div>
         </div>
 
         <div id="blackoutOverlay" class="hidden"></div>
@@ -46,18 +48,48 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/client.js"></script>
+    
   </body>
 </html>
 <script>
+// Fullskjerm på teksten
+const hovedtekst = document.getElementById("hovedtekst");
+hovedtekst.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.log("Fullscreen error:", err);
+    });
+  } else {
+    document.exitFullscreen();
+  }
+});
+
+// Hemmelig admin-knapp på logo
 let clickCount = 0;
 const logo = document.getElementById("secretLogo");
 
-logo.addEventListener("click", function() {
+logo.addEventListener("click", () => {
   clickCount++;
 
-  // Gå til admin etter 10 trykk
-  if (clickCount === 10) {
+  // Gå til admin etter 5 trykk
+  if (clickCount === 5) {
     window.location.href = "admin.html";
   }
 });
-</script>
+const hovedtekst1 = document.getElementById("hovedtekst");
+
+hovedtekst.addEventListener("click", () => {
+  hovedtekst.classList.add("clicked");
+
+  // Fjern effekten etter 300ms
+  setTimeout(() => {
+    hovedtekst.classList.remove("clicked");
+  }, 300);
+});
+
+
+/* Laget av Kevin Johnsen :)*/
+
+
+
+/* End of index.html */

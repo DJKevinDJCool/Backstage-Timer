@@ -584,3 +584,53 @@ document.getElementById("fadeall").addEventListener("click", () => {
     })
     .catch(err => console.error("Feil ved sending:", err));
 });
+document.getElementById("restartButton").addEventListener("click", () => {
+  fetch("/restart");
+});
+
+//pause knapp!
+const pauseBtn = document.getElementById("pauseButton");
+let isPaused = false;
+
+pauseBtn.addEventListener("click", () => {
+  fetch("/pause")
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok) {
+        isPaused = !isPaused;
+        pauseBtn.textContent = isPaused ? "Play▶️" : "Pause⏸️"; // Play vs Pause ikon
+        console.log("[OSC SENT] /cue/active/pausetoggle, isPaused =", isPaused);
+      } else {
+        console.error("Noe gikk galt");
+      }
+    })
+    .catch(err => console.error("Feil ved sending:", err));
+});
+
+// Sett default ikon
+pauseBtn.textContent = "⏸️";
+
+document.getElementById("oppButton").addEventListener("click", () => {
+  fetch("/cue/previous");
+});
+document.getElementById("nedButton").addEventListener("click", () => {
+  fetch("/cue/next");
+});
+document.getElementById("minus10Button").addEventListener("click", () => {
+  fetch("/cue/active/jumpback");
+});
+document.getElementById("plus10Button").addEventListener("click", () => {
+  fetch("/cue/active/jumpfwd");
+});
+document.getElementById("jumpendButton").addEventListener("click", () => {
+  fetch("/cue/active/jumpend");
+});
+
+
+
+/* Laget av Kevin Johnsen :)*/
+
+
+// This file is served to the admin page and handles admin interactions, sending commands to the server, and updating the UI based on server responses and broadcasts.
+
+// admin.js end

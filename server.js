@@ -331,6 +331,75 @@ app.get("/fadeall", (req, res) => {
   console.log("[OSC SENT] /fadeall");
   res.json({ ok: true });
 });
+app.get("/restart", (req, res) => {
+
+  udpSender.send({
+    address: "/cue/active/restart",
+    args: []
+  });
+  console.log("[OSC SENT] /cue/active/restart");
+  res.json({ ok: true });
+
+});
+app.get("/pause", (_req, res) => {
+  udpSender.send({
+    address: "/cue/active/pausetoggle",
+    args: []
+  });
+
+  console.log("[OSC SENT] /cue/active/pausetoggle");
+  res.json({ ok: true });
+});
+
+app.get("/cue/previous", (_req, res) => {
+  udpSender.send({
+    address: "/select/prev",
+    args: []
+  });
+
+  console.log("[OSC SENT] /cue/active/pausetoggle");
+  res.json({ ok: true });
+});
+
+app.get("/cue/next", (_req, res) => {
+  udpSender.send({
+    address: "/select/next",
+    args: []
+  });
+
+  console.log("[OSC SENT] /cue/active/pausetoggle");
+  res.json({ ok: true });
+});
+
+app.get("/cue/active/jumpback", (_req, res) => {
+  udpSender.send({
+    address: "/cue/active/jumpback",
+    args: []
+  });
+
+  console.log("[OSC SENT] /cue/active/jumpback");
+  res.json({ ok: true });
+});
+
+
+app.get("/cue/active/jumpfwd", (_req, res) => {
+  udpSender.send({
+    address: "/cue/active/jumpfwd",
+    args: []
+  });
+
+  console.log("[OSC SENT] /cue/active/jumpfwd");
+  res.json({ ok: true });
+});
+app.get("/cue/active/jumpend", (_req, res) => {
+  udpSender.send({
+    address: "/cue/active/jumpend",
+    args: []
+  });
+
+  console.log("[OSC SENT] /cue/active/jumpend");
+  res.json({ ok: true });
+});
 
 
 // Socket.IO connections
@@ -441,3 +510,7 @@ server.listen(HTTP_PORT, () => {
 // Graceful shutdown
 process.on('SIGINT', () => process.exit());
 
+
+
+/* Laget av Kevin Johnsen :)*/
+// server.js ends here. 
