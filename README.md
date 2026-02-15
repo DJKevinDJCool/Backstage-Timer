@@ -35,8 +35,6 @@ MultiPlay innkommende OSC: 8000
 
 ⚠️ Viktig: Sørg for at portene matcher de du har satt i MultiPlay OSC‑innstillingene!
 
-```
-```
 4️⃣ Bruk appen
 Åpne nettleser på 
 http://localhost:3000
